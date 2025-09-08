@@ -8,18 +8,18 @@ class Person:
 
 
 def create_person_list(people: list[dict]) -> list[Person]:
-    [Person(element["name"], element["age"]) for element in people]
+    [Person(data_person["name"], data_person["age"]) for data_person in people]
 
-    for dict_index in people:
-        name = dict_index["name"]
-        person = Person.people[name]
+    for person_dict in people:
+        person_name = person_dict["name"]
+        person = Person.people[person_name]
 
-        wife_name = dict_index.get("wife")
+        wife_name = person_dict.get("wife")
         if wife_name and wife_name in Person.people:
             person.wife = Person.people[wife_name]
 
-        husband_name = dict_index.get("husband")
+        husband_name = person_dict.get("husband")
         if husband_name and husband_name in Person.people:
             person.husband = Person.people[husband_name]
 
-    return [Person.people[name["name"]] for name in people]
+    return [Person.people[person_dict["name"]] for person_dict in people]
